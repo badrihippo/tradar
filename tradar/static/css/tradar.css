@@ -1,0 +1,61 @@
+.desktop .hide-desktop {
+  display: none;
+}
+
+body {
+  margin-top: 4rem;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.grid-item-content {
+  margin: 0.75rem;
+  padding: 1em;
+}
+
+/* Medium width */
+@media (min-width: 52em) {
+  .container {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+.desktop .container.main {
+  width: calc(100% - 25rem);
+  padding-left: 0;
+  float: right;
+}
+
+.desktop .sidemenu.sidebar {
+  float: left;
+  display: inline-block;
+  z-index: inherit;
+  width: 20rem;
+  box-shadow: none;
+  transition: 0.75s margin-left;
+  background: inherit;
+}
+
+.desktop .sidemenu.sidebar .sidemenu-hero:before {
+  background: none;
+}
+
+.desktop .sidemenu.sidebar .menu {
+  background: inherit;
+  box-shadow: none;
+}
+
+.desktop .sidemenu.sidebar .menu li {
+  border-radius: 0.4em;
+}
+
+.desktop .sidemenu.sidebar .menu li:hover {
+  background-color: #E5E5E5;
+}

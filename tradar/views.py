@@ -6,4 +6,4 @@ from .app import app
 
 @app.route('/')
 def index():
-    return '<h1>Vanakkam!</h1>'
+    return render_template('index.htm')

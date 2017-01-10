@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{% block title %}Tradar{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/material.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/tradar.css" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/basscss-grid@2.0.0/css/grid.css" />
+  </head>
+  <body class="card-container">
+    {% block body %}
+    <div class="toolbar header bg-green-500 color-white">
+      <button class="icon-button" onclick="SideMenu.toggle(document.querySelector('#navigation-sidemenu'))"><i class="icon-menu"></i></button>
+      <span class="toolbar-label">Tradar</span>
+    </div>
+
+    {% block sidebar %}
+    <nav class="sidemenu sidebar" id="navigation-sidemenu">
+      <div class="sidemenu-hero bg-green-500 hide-desktop fade">
+        <h1 class="color-white">Tradar</h1>
+      </div>
+      <ul class="menu">
+        <li><a href="#"><i class="icon-home"></i> Home</a></li>
+        <li><a href="#"><i class="icon-settings"></i> Settings</a></li>
+      </ul>
+    </nav>
+    {% endblock %}
+    
+    <div class="container main">
+      {% block content -%}
+      <div class="grid">
+        {% block grid -%}
+        <div class="grid-sizer" style="col-12"></div>
+        <div class="col-12 md-col-4 grid-item">
+          <div class="grid-item-content card">
+            <p>Hello</p>
+          </div>
+        </div>
+        <div class="col-12 md-col-6 grid-item">
+          <div class="grid-item-content card">
+            <p>Bye</p>
+          </div>
+        </div>
+        <div class="col-12 md-col-2 grid-item">
+          <div class="grid-item-content card">
+            <p>Good</p>
+          </div>
+          {%- endblock %}
+      </div>
+      {%- endblock %}
+    </div>
+    <script src="../static/js/material.min.js">
+    </script>
+    <script type="text/javascript">
+      var md = new Material();
+    </script>
+    <script src="../static/js/masonry.min.js"></script>
+    <script type="text/javascript">
+      var msnry = new Masonry( '.grid', {
+        itemSelector: '.grid-item',
+        columnWidth: 10,
+        percentPosition: true,
+      });
+    </script>
+    {% endblock %}
+  </body>
+</html>
