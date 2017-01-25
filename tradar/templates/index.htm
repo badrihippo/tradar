@@ -1,4 +1,12 @@
 {% extends 'base.htm' %}
 {% block title %}A single portal for all things SSS | Tradar{% endblock %}
-{% block sidebar %}{% endblock %}
+{% block sidebar -%}
+<div class="sidemenu-hero bg-green-500 hide-desktop fade">
+  <h1 class="color-white">Tradar</h1>
+</div>
+<ul class="menu">
+  <li><a href="#"><i class="icon-home"></i> Home</a></li>
+  <li><a href="#"><i class="icon-checkbox-outline"></i> Join Tradar</a></li>
+</ul>
+{%- endblock %}
 {% block content %}{% endblock %}

@@ -15,19 +15,20 @@
       <button class="icon-button" onclick="SideMenu.toggle(document.querySelector('#navigation-sidemenu'))"><i class="icon-menu"></i></button>
       <span class="toolbar-label">Tradar</span>
     </div>
-
-    {% block sidebar %}
     <nav class="sidemenu sidebar" id="navigation-sidemenu">
+      {% block sidebar %}
       <div class="sidemenu-hero bg-green-500 hide-desktop fade">
         <h1 class="color-white">Tradar</h1>
       </div>
       <ul class="menu">
         <li><a href="#"><i class="icon-home"></i> Home</a></li>
         <li><a href="#"><i class="icon-settings"></i> Settings</a></li>
+        <li class="divider"></li>
+        <li><a href="#"><i class="icon-exit-to-app"></i> Sign out</a></li>
       </ul>
+      {% endblock %}
     </nav>
-    {% endblock %}
-    
+
     <div class="container main">
       {% block content -%}
       <div class="grid">
