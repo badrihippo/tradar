@@ -1,5 +1,6 @@
 from .app import app
 import os
+from flask.ext.login import UserMixin
 
 if 'NEO4J_REST_URL' not in os.environ:
     # Set NEO4J_REST_URL environment variable from config if unset
@@ -37,7 +38,7 @@ class Person(StructuredNode):
     account = RelationshipTo('Account', 'HAS_ACCOUNT', cardinality=One)
     country = RelationshipTo('Country', 'IS_FROM')
 
-class Account(StructuredNode):
+class Account(StructuredNode, UserMixin):
     '''
     Contains actual account data. Note that personal data is stored in
     the "Person" model instead.
@@ -47,3 +48,6 @@ class Account(StructuredNode):
     email = StringProperty()
 
     owner = RelationshipFrom('Person', 'HAS_ACCOUNT', cardinality=One)
+
+    def get_id(self):
+        return self.username
