@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}Tradar{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/material.css" />
-    <link rel="stylesheet" type="text/css" href="../static/css/tradar.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/material.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tradar.css') }}" />
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/basscss-grid@2.0.0/css/grid.css" />
     {%- block extrahead %}{% endblock %}
   </head>
@@ -52,12 +52,12 @@
       </div>
       {%- endblock %}
     </div>
-    <script src="../static/js/material.min.js">
+    <script src="{{ url_for('static', filename='js/material.min.js') }}">
     </script>
     <script type="text/javascript">
       var md = new Material();
     </script>
-    <script src="../static/js/masonry.min.js"></script>
+    <script src="{{ url_for('static', filename='js/masonry.min.js') }}"></script>
     <script type="text/javascript">
       var msnry = new Masonry( '.grid', {
         itemSelector: '.grid-item',
