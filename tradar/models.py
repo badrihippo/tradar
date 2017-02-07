@@ -1,5 +1,9 @@
 from .app import app
 from flask.ext.login import UserMixin
+from werkzeug.security import (
+    check_password_hash,
+    generate_password_hash,
+)
 
 from neomodel import (
     StructuredNode,
@@ -45,3 +49,11 @@ class Account(StructuredNode, UserMixin):
 
     def get_id(self):
         return self.username
+
+    def set_password(self, plaintext):
+        self.password = generate_password_hash(plaintext)
+
+    def check_password(self, plaintext):
+        if check_password_hash(self.password, plaintext):
+            return True
+        return False

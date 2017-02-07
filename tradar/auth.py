@@ -38,7 +38,7 @@ def login():
     if form.validate_on_submit():
         # Login and validate user
         user = load_user(form.username.data)
-        if (user is None) or (user.password and user.password != form.password.data):
+        if (user is None) or not user.check_password(form.password.data):
             msg = 'Invalid username or password'
             if 'password' in form.errors:
                 form.errors['password'].append(msg)
