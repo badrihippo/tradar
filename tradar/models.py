@@ -36,6 +36,9 @@ class Person(StructuredNode):
     account = RelationshipTo('Account', 'HAS_ACCOUNT', cardinality=One)
     country = RelationshipTo('Country', 'IS_FROM')
 
+    profile_picture = StringProperty(default='/static/img/profile-pic-default.svg')
+    cover_picture = StringProperty(default='/static/img/cover-stars.svg')
+
 class Account(StructuredNode, UserMixin):
     '''
     Contains actual account data. Note that personal data is stored in
