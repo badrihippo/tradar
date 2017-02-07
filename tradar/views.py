@@ -20,7 +20,7 @@ def index():
         return render_template('home.htm')
     return render_template('index.htm')
 
-@app.route('/@<username>/')
+@app.route('/~<username>/')
 def profile(username):
     try:
         account = Account.nodes.get(username=username)
