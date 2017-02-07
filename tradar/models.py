@@ -1,11 +1,5 @@
 from .app import app
-import os
 from flask.ext.login import UserMixin
-
-if 'NEO4J_REST_URL' not in os.environ:
-    # Set NEO4J_REST_URL environment variable from config if unset
-    # This variable is referenced by neomodel to connect to the database
-    os.environ['NEO4J_REST_URL'] = app.config.get('NEO4J_REST_URL')
 
 from neomodel import (
     StructuredNode,
