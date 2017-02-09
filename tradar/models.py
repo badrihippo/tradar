@@ -68,6 +68,7 @@ class Account(StructuredNode, UserMixin):
     email_belongs_to = StringProperty()
 
     owner = RelationshipFrom('Person', 'HAS_ACCOUNT', cardinality=One)
+    is_active = BooleanProperty(default=True)
 
     def get_id(self):
         return self.username

@@ -39,6 +39,12 @@ def login():
                 form.errors['password'].append(msg)
             else:
                 form.errors['password'] = [msg]
+        elif not user.is_active:
+            msg = 'Your account is yet to be activated'
+            if 'username' in form.errors:
+                form.errors['username'].append(msg)
+            else:
+                form.errors['username'] = [msg]
         else:
             # All OK. Log in user.
             login_user(user)
