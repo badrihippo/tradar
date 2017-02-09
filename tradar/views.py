@@ -1,9 +1,14 @@
 from flask import (
     url_for,
+    redirect,
     render_template,
     abort,
+    flash,
 )
-from .app import app
+from .app import (
+    app,
+    db,
+)
 from .auth import (
     current_user,
     login_required
@@ -13,12 +18,38 @@ from .models import (
     Account,
     Person
 )
+from .forms import (
+    SignupForm,
+)
+import uuid
 
 @app.route('/')
 def index():
     if current_user.is_authenticated:
         return render_template('home.htm')
     return render_template('index.htm')
+
+@app.route('/l/signup/', methods=['GET', 'POST'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        with db.transaction:
+            p = Person()
+            a = Account()
+            a.username = uuid.uuid1()
+            a.email = form.email.data
+            a.email_belongs_to = form.email_belongs_to.data
+            p.full_name = form.name.data
+            p.gender = form.gender.data
+            p.birthday = form.birthday.data
+            a.save()
+            p.save()
+        p.account.connect(a)
+        # TODO: Make it actually send emails
+        print ('[Send email to %(email)s]' % {'email': form.email.data})
+        flash('Please check your inbox for signup instructions')
+        return redirect(url_for('index'))
+    return render_template('signup.htm', form=form)
 
 @app.route('/~<username>/')
 def profile(username):
