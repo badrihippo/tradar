@@ -5,8 +5,6 @@ from flask.ext.login import (
     current_user,
     login_required
 )
-import wtforms as wtf
-from flask.ext.wtf import Form
 from flask import (
     render_template,
     redirect,
@@ -16,6 +14,7 @@ from flask import (
 )
 from .app import app
 from .models import Account
+from .forms import LoginForm
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -27,10 +26,6 @@ def load_user(username):
     except Account.DoesNotExist:
         return None
     return user
-
-class LoginForm(Form):
-    username= wtf.TextField('Username')
-    password = wtf.PasswordField('Password')
 
 @app.route('/l/', methods=['GET', 'POST'])
 def login():
