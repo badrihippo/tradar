@@ -4,6 +4,7 @@ from werkzeug.security import (
     check_password_hash,
     generate_password_hash,
 )
+import uuid
 
 from neomodel import (
     StructuredNode,
@@ -31,7 +32,9 @@ class Person(StructuredNode):
     from an account; even people without accounts can be referenced here.
     This is to ease account removal without breaking the data.
     '''
-    full_name = StringProperty()
+    uuid = StringProperty(default=lambda: uuid.uuid1())
+
+    full_name = StringProperty(required=True)
 
     account = RelationshipTo('Account', 'HAS_ACCOUNT', cardinality=One)
     country = RelationshipTo('Country', 'IS_FROM')
