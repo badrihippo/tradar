@@ -10,6 +10,8 @@ from neomodel import (
     StructuredNode,
     StringProperty,
     IntegerProperty,
+    BooleanProperty,
+    DateProperty,
     RelationshipTo,
     RelationshipFrom,
     
@@ -18,6 +20,17 @@ from neomodel import (
     ZeroOrOne,
     One
     )
+
+GENDER_CHOICES = (
+    ('M', 'Male'),
+    ('F', 'Female'),
+    ('O', 'Other'),
+)
+
+EMAIL_OWNER_CHOICES = (
+    ('me', 'me'),
+    ('parents', 'my parent(s)'),
+)
 
 class Country(StructuredNode):
     '''
@@ -35,6 +48,8 @@ class Person(StructuredNode):
     uuid = StringProperty(default=lambda: uuid.uuid1())
 
     full_name = StringProperty(required=True)
+    birthday = DateProperty()
+    gender = StringProperty(choices=GENDER_CHOICES)
 
     account = RelationshipTo('Account', 'HAS_ACCOUNT', cardinality=One)
     country = RelationshipTo('Country', 'IS_FROM')
@@ -50,6 +65,7 @@ class Account(StructuredNode, UserMixin):
     username = StringProperty(unique_index=True, required=True)
     password = StringProperty()
     email = StringProperty()
+    email_belongs_to = StringProperty()
 
     owner = RelationshipFrom('Person', 'HAS_ACCOUNT', cardinality=One)
 
