@@ -1,0 +1,11 @@
+{% extends 'accounts/base.htm' %}
+{% block title %}Signup email sent | Tradar{% endblock %}
+{% block login_card_container %}
+<div class="card login-card">
+  <div class="card-icon">
+    <i class="icon icon-email"></i>
+  </div>
+  <h2>Email sent</h2>
+  <p>We have sent an email to <b>{{ email }}</b>, with instructions to activate your account. If you can't find it in your inbox, check your spam for messages from Tradar.</p>
+</div>
+{% endblock %}

@@ -22,7 +22,10 @@ from .forms import (
     SignupForm,
 )
 from .util.security import ts
-from .util.email import send_email
+from .util.email import (
+    mail,
+    Message
+)
 import uuid
 
 @app.route('/')
@@ -47,11 +50,13 @@ def signup():
             a.save()
             p.save()
         p.account.connect(a)
-        msg = 'Please go to the following link to sign up: %s' % '<...>'
-        send_email(msg, sender='noreply@tradar', recipients=[form.email.data])
-        flash('Please check your inbox for signup instructions')
-        return redirect(url_for('index'))
-    return render_template('signup.htm', form=form)
+        msg = Message()
+        msg.subject = 'Welcome to Tradar'
+        msg.recipients.append(a.email)
+        msg.body = 'Please go to the following link to sign up: %s' % '<...>'
+        mail.send(msg)
+        return render_template('accounts/signup_emailsent.htm', email=a.email)
+    return render_template('accounts/signup.htm', form=form)
 
 @app.route('/~<username>/')
 def profile(username):
