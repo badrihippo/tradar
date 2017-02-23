@@ -1,0 +1,28 @@
+{% extends 'accounts/base.htm' %}
+{% block title %}Sign in to Tradar{% endblock %}
+{% block login_card_container %}
+<form action="" method="post" class="card login-card">
+  <div class="card-icon">
+    <i class="icon icon-person"></i>
+  </div>
+  <h2>Sign in to Tradar</h2>
+    <ul class="list error-list">
+    {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+      {% for error in field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    {% endfor %}
+    </ul>
+  {{ form.csrf_token }}
+  <div>
+    <div class="text-input-container">
+    <i class="icon-person text-input-icon"></i>
+    {{ form.username(class='text-input', placeholder='Username') }}
+    </div>
+  </div>
+  <div class="card-footer">
+    <input type="submit" class="button button-full raised bg-green-500 color-white" value="Next" />
+    <a class="button color-grey-500" href="{{ url_for('signup') }}">Create new account</a>
+  </div>
+</form>
+{% endblock %}

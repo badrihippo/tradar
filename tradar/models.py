@@ -32,6 +32,12 @@ EMAIL_OWNER_CHOICES = (
     ('parents', 'my parent(s)'),
 )
 
+SIGNIN_MODE_CHOICES = (
+    ('none', 'Not set'),
+    ('password', 'Password'),
+    ('email', 'Email'),
+)
+
 class Country(StructuredNode):
     '''
     Contains data for a particular country
@@ -69,6 +75,7 @@ class Account(StructuredNode, UserMixin):
 
     owner = RelationshipFrom('Person', 'HAS_ACCOUNT', cardinality=One)
     is_active = BooleanProperty(default=True)
+    signin_mode = StringProperty(choices=SIGNIN_MODE_CHOICES, default='none')
 
     def get_id(self):
         return self.username

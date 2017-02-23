@@ -1,0 +1,15 @@
+{% extends 'accounts/base.htm' %}
+{% block title %}Account deactivated | Tradar{% endblock %}
+{% block login_card_container %}
+<div class="card login-card">
+  <div class="card-icon">
+    <i class="icon icon-error"></i>
+  </div>
+  <h2>Account deactivated</h2>
+  <p>The account you are trying to access has been deactivated, either because you are yet to confirm the email address, or because the Terms and Conditions were violated.</p>
+  <p>If you have recently signed up for an account, please check your inbox for the account activation link.</p>
+  <div class="card-footer">
+    <a href="{{ url_for('index') }}" class="button color-blue">Back to Tradar</a>
+  </div>
+</div>
+{% endblock %}

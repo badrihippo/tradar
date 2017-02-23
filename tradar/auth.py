@@ -14,7 +14,15 @@ from flask import (
 )
 from .app import app
 from .models import Account
-from .forms import LoginForm
+from .forms import (
+    LoginForm,
+    UsernameForm,
+    PasswordForm,
+)
+from .util.email import (
+    mail,
+    Message,
+)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -29,30 +37,49 @@ def load_user(username):
 
 @app.route('/l/', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    form = UsernameForm()
+    if form.validate_on_submit():
+        # Go to next stage of login
+        user = load_user(form.username.data)
+        if user is None:
+            # Pretend to have sent the sign-in email
+            return render_template('accounts/login_emailsent.htm')
+        elif not user.is_active:
+            return render_template('accounts/login_deactivated.htm')
+        elif user.signin_mode == 'password':
+            password_form = PasswordForm(username=user.username)
+            return render_template('accounts/login_withpassword.htm',
+                form=password_form,
+                name=user.owner.get().full_name)
+        elif user.signin_mode == 'email':
+            # TODO: Send signin email
+            return render_template('accounts/login_emailsent.htm')
+        else:
+            flash('There was an error signing in. Please try again.')
+    return render_template('accounts/login.htm', form=form)
+
+@app.route('/l/pass/', methods=['POST'])
+def login_withpassword():
+    form = PasswordForm()
     if form.validate_on_submit():
         # Login and validate user
         user = load_user(form.username.data)
         if (user is None) or not user.check_password(form.password.data):
-            msg = 'Invalid username or password'
+            msg = 'Invalid password'
             if 'password' in form.errors:
                 form.errors['password'].append(msg)
             else:
                 form.errors['password'] = [msg]
         elif not user.is_active:
-            msg = 'Your account is yet to be activated'
-            if 'username' in form.errors:
-                form.errors['username'].append(msg)
-            else:
-                form.errors['username'] = [msg]
+           return render_template('accounts/login_deactivated.htm')
         else:
             # All OK. Log in user.
             login_user(user)
-            print('Logged in: %s' % user.username)
 
             return redirect(request.args.get('next') or '/')
-
-    return render_template('login.htm', form=form)
+    return render_template('accounts/login_withpassword.htm',
+        form=form,
+        name=user.owner.get().full_name)
 
 @app.route('/logout/')
 def logout():

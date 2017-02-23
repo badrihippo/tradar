@@ -7,6 +7,7 @@ from wtforms import (
     IntegerField,
     DateField,
     BooleanField,
+    HiddenField,
 )
 from wtforms.validators import (
     Required,
@@ -26,6 +27,14 @@ GENDER_CHOICES = (
 class LoginForm(Form):
     username= TextField('Username', validators=[Required()])
     password = PasswordField('Password', validators=[Required()])
+
+class UsernameForm(Form):
+    username = TextField('Username', validators=[Required()])
+
+class PasswordForm(Form):
+    username= HiddenField('Username', validators=[Required()])
+    password = PasswordField('Password', validators=[Required()])
+
 
 class SignupForm(Form):
     name = TextField('Name', validators=[Required()])

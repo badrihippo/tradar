@@ -1,0 +1,66 @@
+{% extends 'index.htm' %}
+{% block title %}Sign in to Tradar{% endblock %}
+{% block extrahead %}
+<style type="text/css">
+  .top-bar {
+    height:5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  .login-card {
+    padding: 1.5rem;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+  }
+  .login-card-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .login-card h2, .login-card h3 {
+    text-align: center;
+  }
+  .login-card p {
+    font-size: 1em;
+  }
+  .login-card .card-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.2rem;
+  }
+  .card-icon {
+    text-align: center;
+    font-size: 5rem;
+  }
+  .align-center {
+    text-align: center;
+  }
+  @media (min-width: 24em) {
+    .login-card-container {
+      max-width: 20rem;
+    }
+  }
+  .small {
+    font-size: 0.8em;
+  }
+  .button-full {
+    width: 100%;
+    margin: 0.5rem;
+    padding: 0.8rem;
+  }
+
+</style>
+{% endblock %}
+{% block body -%}
+<div class="bg-green-500 top-bar"></div>
+<div class="login-card-container">
+  {% block login_card_container %}
+  {% endblock %}
+</div>
+{%- endblock %}
