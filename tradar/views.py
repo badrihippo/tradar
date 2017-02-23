@@ -21,6 +21,8 @@ from .models import (
 from .forms import (
     SignupForm,
 )
+from .util.security import ts
+from .util.email import send_email
 import uuid
 
 @app.route('/')
@@ -45,8 +47,8 @@ def signup():
             a.save()
             p.save()
         p.account.connect(a)
-        # TODO: Make it actually send emails
-        print ('[Send email to %(email)s]' % {'email': form.email.data})
+        msg = 'Please go to the following link to sign up: %s' % '<...>'
+        send_email(msg, sender='noreply@tradar', recipients=[form.email.data])
         flash('Please check your inbox for signup instructions')
         return redirect(url_for('index'))
     return render_template('signup.htm', form=form)
