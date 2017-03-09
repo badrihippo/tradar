@@ -74,7 +74,7 @@ class Account(StructuredNode, UserMixin):
     email_belongs_to = StringProperty()
 
     owner = RelationshipFrom('Person', 'HAS_ACCOUNT', cardinality=One)
-    is_active = BooleanProperty(default=True)
+    is_active = BooleanProperty(default=False)
     signin_mode = StringProperty(choices=SIGNIN_MODE_CHOICES, default='none')
 
     def get_id(self):

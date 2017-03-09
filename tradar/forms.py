@@ -8,6 +8,7 @@ from wtforms import (
     DateField,
     BooleanField,
     HiddenField,
+    ValidationError,
 )
 from wtforms.validators import (
     Required,
@@ -17,6 +18,7 @@ from wtforms.validators import (
 )
 from .models import (
     EMAIL_OWNER_CHOICES,
+    Account
 )
 GENDER_CHOICES = (
     ('F', 'girl'),
@@ -34,6 +36,14 @@ class UsernameForm(Form):
 class PasswordForm(Form):
     username= HiddenField('Username', validators=[Required()])
     password = PasswordField('Password', validators=[Required()])
+
+class UsernamePasswordSelectionForm(Form):
+    username = TextField('Username', validators=[])
+    password = PasswordField('Password', validators=[])
+
+    def validate_password(form, field):
+        if len(field.data) < 6 and len(field.data) != 0:
+            raise ValidationError('Password must be at least 6 characters (unless it\'s blank)')
 
 
 class SignupForm(Form):

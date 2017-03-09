@@ -1,0 +1,10 @@
+Hello, {{ name }}. Welcome to Tradar!
+
+You need to confirm your email before we continue. To do that, click
+on the link below:
+
+    {{ confirm_url }}
+
+Don't know what we're talking about? If you didn't sign up to Tradar
+then this is probably a mistake. In that case, you can safely ignore
+this email.

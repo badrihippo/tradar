@@ -1,0 +1,38 @@
+{% extends 'accounts/base.htm' %}
+{% block title %}Pick a username | Tradar{% endblock %}
+{% block login_card_container %}
+<form action="" method="post" class="card login-card">
+  <div class="card-icon">
+    <i class="icon icon-person"></i>
+  </div>
+  <h3>Almost there!</h3>
+  <p>{{ person.full_name }}, your account is almost ready. Just setup your username and password, and you'll be ready to start!</p>
+  <ul class="list error-list">
+  {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+    {% for error in field_errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  {% endfor %}
+  </ul>
+  {{ form.csrf_token }}
+  <div>
+    <label for="{{ form.username.id }}">
+        <i class="icon-person"></i>
+        Username
+    </label>
+    <div>{{ form.username(class='text-input') }}</div>
+  </div>
+  <p>We can email you a special link every time you want to sign in. If you'd rather use a password, you can type one below.</p>
+  <div>
+    <label for="{{ form.password.id }}">
+        <i class="icon-lock"></i>
+        Password (optional)
+    </label>
+    <div>{{ form.password(class='text-input') }}</div>
+  </div>
+  <div class="card-footer">
+    <input type="submit" class="button button-full raised color-white bg-green-500" value="Finish" />
+    <a class="button color-grey-500">Not you?</a>
+  </div>
+</form>
+{% endblock %}
