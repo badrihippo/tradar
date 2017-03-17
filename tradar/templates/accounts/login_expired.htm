@@ -1,0 +1,15 @@
+{% extends 'accounts/base.htm' %}
+{% block title %}Token expired | Tradar{% endblock %}
+{% block login_card_container %}
+<div class="card login-card">
+  <div class="card-icon">
+    <i class="icon icon-error"></i>
+  </div>
+  <h2>Token expired</h2>
+  <p>The email link/token you are trying to use has expired. This is probably because you have either already used it, or have signed into your account by some other method after this link was generated.</p>
+  <p>To sign in, please return to the login page to have a new token emailed to you.</p>
+  <div class="card-footer">
+    <a href="{{ url_for('login') }}" class="button color-blue">Back to login page</a>
+  </div>
+</div>
+{% endblock %}

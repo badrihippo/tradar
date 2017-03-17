@@ -1,0 +1,12 @@
+Hello, {{ name }}!
+
+It seems you wanted to sign in to Tradar. Click on the link below to
+sign in:
+
+    {{ confirm_url }}
+
+This link will expire in 15 minutes and can only be used once.
+
+Don't know what we're talking about? If you didn't try to sign in to
+Tradar, then this is probably a mistake. In that case, you can safely
+ignore this email.
