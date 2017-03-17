@@ -5,6 +5,7 @@ from werkzeug.security import (
     generate_password_hash,
 )
 import uuid
+from datetime import datetime
 
 from neomodel import (
     StructuredNode,
@@ -12,6 +13,7 @@ from neomodel import (
     IntegerProperty,
     BooleanProperty,
     DateProperty,
+    DateTimeProperty,
     RelationshipTo,
     RelationshipFrom,
     
@@ -76,6 +78,9 @@ class Account(StructuredNode, UserMixin):
     owner = RelationshipFrom('Person', 'HAS_ACCOUNT', cardinality=One)
     is_active = BooleanProperty(default=False)
     signin_mode = StringProperty(choices=SIGNIN_MODE_CHOICES, default='none')
+
+    creation_date = DateTimeProperty(default=lambda: datetime.now())
+    last_login = DateTimeProperty(default=lambda: datetime.now())
 
     def get_id(self):
         return self.username

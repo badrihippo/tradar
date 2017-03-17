@@ -5,6 +5,7 @@ from flask import (
     abort,
     flash,
 )
+from datetime import datetime
 from .app import (
     app,
     db,
@@ -103,6 +104,7 @@ def signup_confirm_email(token):
             a.set_password(form.password.data)
             a.signin_mode = 'password'
         a.is_active = True
+        a.last_login = datetime.now()
 
         # Try to save model
         try:

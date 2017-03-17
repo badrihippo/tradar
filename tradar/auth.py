@@ -12,6 +12,7 @@ from flask import (
     request,
     flash
 )
+from datetime import datetime
 from .app import app
 from .models import Account
 from .forms import (
@@ -73,7 +74,9 @@ def login_withpassword():
         elif not user.is_active:
            return render_template('accounts/login_deactivated.htm')
         else:
-            # All OK. Log in user.
+            # All OK. Set last_login and login user
+            user.last_login = datetime.now()
+            user.save()
             login_user(user)
 
             return redirect(request.args.get('next') or '/')
