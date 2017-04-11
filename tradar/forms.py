@@ -1,6 +1,7 @@
 from flask.ext.wtf import Form
 from wtforms import (
     TextField,
+    TextAreaField,
     PasswordField,
     SelectField,
     RadioField,
@@ -8,6 +9,7 @@ from wtforms import (
     DateField,
     BooleanField,
     HiddenField,
+    SubmitField,
     ValidationError,
 )
 from wtforms.validators import (
@@ -58,3 +60,13 @@ class SignupForm(Form):
         validators=[Required()])
     accepted_terms = BooleanField('I agree to the Terms and Conditions',
         validators=[Required()])
+
+POST_SHARE_CHOICES = (
+    ('public', 'All SSSians'),
+)
+
+class NewPostForm(Form):
+    posted_by = HiddenField('Post author')
+    content = TextAreaField('Post Content', validators=[Required()])
+    share_with = SelectField(choices=POST_SHARE_CHOICES)
+    submit_button = SubmitField('Post')

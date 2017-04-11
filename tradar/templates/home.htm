@@ -1,3 +1,14 @@
 {% extends 'base.htm' %}
 {% block title %}Tradar{% endblock %}
-{% block content %}{% endblock %}
+{% block content %}
+<div class="col-12 md-col-6 grid-item">
+  <div class="grid-item-content card post-card">
+    {% with form=form_post, current_owner=current_user.owner.get() %}
+      {% include 'components/new_post.htm' %}
+    {% endwith %}
+  </div>
+</div>
+{% endblock %}
+{% block extrajs %}
+<script src="{{ url_for('static', filename='js/new-post.js') }}"></script>
+{% endblock %}

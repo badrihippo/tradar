@@ -17,12 +17,14 @@ from .auth import (
 from .models import (
     Country,
     Account,
-    Person
+    Person,
+    Post,
 )
 from .forms import (
     SignupForm,
     LoginForm,
     UsernamePasswordSelectionForm,
+    NewPostForm,
 )
 from .util.security import ts
 from .util.email import (
@@ -37,7 +39,8 @@ import uuid
 @app.route('/')
 def index():
     if current_user.is_authenticated:
-        return render_template('home.htm')
+        form_post = NewPostForm()
+        return render_template('home.htm', form_post=form_post)
     return render_template('index.htm')
 
 @app.route('/l/signup/', methods=['GET', 'POST'])
@@ -136,3 +139,18 @@ def profile(username):
         abort(404)
     person = account.owner.get()
     return render_template('profile.htm', person=person)
+
+@app.route('/p/new', methods=['POST'])
+@login_required
+def new_post():
+    form = NewPostForm()
+    current_person = current_user.owner.get()
+    if form.validate_on_submit():
+        p = Post()
+        p.content = form.content.data
+        p.save()
+        p.posted_by.connect(current_person)
+        flash('Your post has been published.')
+        return redirect(url_for('index'))
+
+    abort(405)

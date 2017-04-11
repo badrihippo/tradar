@@ -66,6 +66,11 @@
         percentPosition: true,
       });
     </script>
+    <script src="{{ url_for('static', filename='js/autosize.min.js') }}"></script>
+    <script>
+      autosize(document.querySelectorAll('.new-post textarea'));
+    </script>
+    {% block extrajs %}{% endblock %}
     {% endblock %}
   </body>
 </html>

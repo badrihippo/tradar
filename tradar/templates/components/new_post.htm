@@ -1,0 +1,17 @@
+<form action="{{ url_for('new_post') }}" method="post" class="new-post">
+  <header class="post-header">
+    <a class="post-menu post-close">
+      <i class="icon-close"></i>
+    </a>
+    <img src="{{ current_owner.profile_picture }}"/>
+    {{ form.posted_by }}
+    <span class="post-author">{{ current_owner.full_name }}</span>
+  </header>
+  {{ form.csrf_token }}
+  {{ form.content(placeholder='New Post...') }}
+  <footer class="post-footer">
+    <label for="{{ form.share_with.id }}">Share with: </label>
+    {{ form.share_with }}
+    {{ form.submit_button(class='button color-green-500') }}
+  </footer>
+</form>
