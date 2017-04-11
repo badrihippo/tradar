@@ -125,7 +125,7 @@ def login_withpassword():
         else:
             form.errors['password'] = [msg]
 
-    if form.validate_on_submit():
+    elif form.validate_on_submit():
         # Login and validate user
         if not user.is_active:
            return render_template('accounts/login_deactivated.htm')
