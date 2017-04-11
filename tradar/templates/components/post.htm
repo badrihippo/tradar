@@ -1,0 +1,16 @@
+{% macro render_post(post, owner) -%}
+<div class="col-12 md-col-6 grid-item">
+  <div class="grid-item-content card post-card">
+    <header class="post-header">
+      <img src="{{ owner.profile_picture }}"/>
+      <span class="post-author">{{ owner.full_name }}</span>
+    </header>
+    <div class="post-content">
+      {{ post.content }}
+    </div>
+    <footer class="post-footer">
+      <button class="smile-button raised ripple"><i class="icon-smile-smile"></i></button>
+    </footer>
+  </div>
+</div>
+{%- endmacro %}

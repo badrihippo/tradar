@@ -1,3 +1,4 @@
+{% import 'components/post.htm' as components%}
 {% extends 'base.htm' %}
 {% block title %}{{ person.full_name }} - Tradar{% endblock %}
 {% block extrahead %}
@@ -47,10 +48,6 @@
 {% endblock %}
 {% block grid %}
 {% for post in person.posts %}
-<div class="col-12 md-col-6 grid-item">
-  <div class="grid-item-content card">
-    {{ post.content }}
-  </div>
-</div>
+{{ components.render_post(post, person) }}
 {% endfor %}
 {% endblock %}

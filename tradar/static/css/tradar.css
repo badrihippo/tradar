@@ -73,3 +73,46 @@ body {
   color: #FFFFFF;
   padding: 0.5rem;
 }
+
+.post-card {
+  margin: 0.5rem;
+}
+.post-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.post-header .post-author {
+  font-weight: bold;
+  margin-left: 1rem;
+}
+.post-header img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+}
+.post-footer {
+  margin-top: 1rem;
+}
+
+.fab.very-small {
+  font-size: 1em;
+  line-height: 1em;
+}
+
+.smile-button {
+	border: none;
+	background-color: lightgrey;
+	color: grey;
+	font-size: 27px;
+  font-weight: bold;
+	height: 34px;
+	width: 34px;
+  padding: 0;
+	line-height: 1em;
+	border-radius: 50%;
+	overflow: hidden;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}

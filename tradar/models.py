@@ -65,6 +65,8 @@ class Person(StructuredNode):
     profile_picture = StringProperty(default='/static/img/profile-pic-default.svg')
     cover_picture = StringProperty(default='/static/img/cover-stars.svg')
 
+    posts = RelationshipTo('Post', 'POSTED')
+
 class Account(StructuredNode, UserMixin):
     '''
     Contains actual account data. Note that personal data is stored in
@@ -92,3 +94,16 @@ class Account(StructuredNode, UserMixin):
         if check_password_hash(self.password, plaintext):
             return True
         return False
+
+class Post(StructuredNode):
+    '''
+    Contains data for a single post. This model keeps track of the
+    person/shop who made the post, as well as the account from which it
+    was posted.
+    '''
+
+    posted_by = RelationshipFrom('Person', 'POSTED', cardinality=One)
+    posting_account = RelationshipFrom('Account', 'POSTED', cardinality=One)
+    date = DateTimeProperty(default=lambda: datetime.now())
+
+    content = StringProperty()
