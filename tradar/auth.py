@@ -12,6 +12,7 @@ from flask import (
     request,
     flash
 )
+from werkzeug.local import LocalProxy
 from datetime import datetime
 from .app import app
 from .models import Account
@@ -39,6 +40,24 @@ def load_user(username):
     except Account.DoesNotExist:
         return None
     return user
+
+# Set up current_owner context processor.
+def get_current_owner():
+    '''
+    Returns the current owner of the account. Here, current_owner
+    refers to the Person who owns the Account, as opposed to
+    current_user which is the Account itself.
+    '''
+    if current_user.is_authenticated:
+        return current_user.owner.get()
+    else:
+        return None
+
+current_owner = LocalProxy(lambda: get_current_owner())
+
+@app.context_processor
+def owner_context_processor():
+    return dict(current_owner=current_owner)
 
 @app.route('/l/', methods=['GET', 'POST'])
 def login():
